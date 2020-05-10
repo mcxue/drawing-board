@@ -8,35 +8,57 @@ const $canvas = document.querySelector('.canvas')
 const ctx = $canvas.getContext('2d');
 
 
-ctx.strokeStyle = "black"
+let mouseState = false
+let lastLocation
+
+let widthChoice
+let rubberChoice
+let colorChoice
+let touchDevice = "ontouchend" in document ? true : false;
 
 $canvas.width = document.documentElement.clientWidth
 $canvas.height = document.documentElement.clientHeight - 135
-let mouseState = false
-let lastLocation = [0, 0]
+ctx.strokeStyle = "black"
 
-$canvas.onmousedown = (e) => {
-    mouseState = true
-    lastLocation = [e.clientX, e.clientY]
-}
 
-$canvas.onmouseup = () => {
-    mouseState = false
-}
-
-$canvas.onmousemove = (e) => {
-
-    if (mouseState) {
+if (touchDevice) {
+    $canvas.ontouchstart = (e) => {
+        lastLocation = [e.touches[0].clientX, e.touches[0].clientY]
+    }
+    $canvas.ontouchmove = (e) => {
         ctx.beginPath()
         ctx.moveTo(lastLocation[0], lastLocation[1])
-        console.log(lastLocation[0], lastLocation[1])
-        ctx.lineTo(e.clientX, e.clientY)
+        ctx.lineTo(e.touches[0].clientX, e.touches[0].clientY)
         ctx.lineWidth = 10
         ctx.lineCap = 'round'
         ctx.stroke()
+        lastLocation = [e.touches[0].clientX, e.touches[0].clientY]
+    }
+} else {
+    $canvas.onmousedown = (e) => {
+        mouseState = true
         lastLocation = [e.clientX, e.clientY]
     }
+
+    $canvas.onmouseup = () => {
+        mouseState = false
+    }
+
+    $canvas.onmousemove = (e) => {
+
+        if (mouseState) {
+            ctx.beginPath()
+            ctx.moveTo(lastLocation[0], lastLocation[1])
+            ctx.lineTo(e.clientX, e.clientY)
+            ctx.lineWidth = 10
+            ctx.lineCap = 'round'
+            ctx.stroke()
+            lastLocation = [e.clientX, e.clientY]
+        }
+    }
 }
+
+
 
 
 $dots.addEventListener('click', (e) => {
