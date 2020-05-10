@@ -15,27 +15,30 @@ let touchDevice = "ontouchend" in document ? true : false;
 let widthChoice = 1
 let rubberChoice = false
 let colorChoice = 0
-let colorStore = ['black', 'red', '#ff5000', '1AAD19', 'blue', '#8000ff', '#483D8D']
+let colorStore = ['black', 'red', '#ff5000', '#1AAD19', 'blue', '#8000ff', '#483D8D']
 let widthStore = ['20', '15', '10']
 
 
 $canvas.width = document.documentElement.clientWidth
 $canvas.height = document.documentElement.clientHeight - 135
 
-
 if (touchDevice) {
     $canvas.ontouchstart = (e) => {
         lastLocation = [e.touches[0].clientX, e.touches[0].clientY]
     }
     $canvas.ontouchmove = (e) => {
-        ctx.beginPath()
-        ctx.moveTo(lastLocation[0], lastLocation[1])
-        ctx.lineTo(e.touches[0].clientX, e.touches[0].clientY)
-        ctx.lineWidth = widthStore[widthChoice]
-        ctx.strokeStyle = colorStore[colorChoice]
-        ctx.lineCap = 'round'
-        ctx.stroke()
-        lastLocation = [e.touches[0].clientX, e.touches[0].clientY]
+        if (rubberChoice) {
+            ctx.clearRect(e.touches[0].clientX, e.touches[0].clientY, 30, 30)
+        } else {
+            ctx.beginPath()
+            ctx.moveTo(lastLocation[0], lastLocation[1])
+            ctx.lineTo(e.touches[0].clientX, e.touches[0].clientY)
+            ctx.lineWidth = widthStore[widthChoice]
+            ctx.strokeStyle = colorStore[colorChoice]
+            ctx.lineCap = 'round'
+            ctx.stroke()
+            lastLocation = [e.touches[0].clientX, e.touches[0].clientY]
+        }
     }
 } else {
     $canvas.onmousedown = (e) => {
@@ -50,14 +53,19 @@ if (touchDevice) {
     $canvas.onmousemove = (e) => {
 
         if (mouseState) {
-            ctx.beginPath()
-            ctx.moveTo(lastLocation[0], lastLocation[1])
-            ctx.lineTo(e.clientX, e.clientY)
-            ctx.lineWidth = widthStore[widthChoice]
-            ctx.strokeStyle = colorStore[colorChoice]
-            ctx.lineCap = 'round'
-            ctx.stroke()
-            lastLocation = [e.clientX, e.clientY]
+            if (rubberChoice) {
+                ctx.clearRect(e.clientX, e.clientY, 30, 30)
+            } else {
+                ctx.beginPath()
+                ctx.moveTo(lastLocation[0], lastLocation[1])
+                ctx.lineTo(e.clientX, e.clientY)
+                ctx.lineWidth = widthStore[widthChoice]
+                ctx.strokeStyle = colorStore[colorChoice]
+                ctx.lineCap = 'round'
+                ctx.stroke()
+                lastLocation = [e.clientX, e.clientY]
+            }
+
         }
     }
 }
@@ -92,6 +100,7 @@ $colorList.addEventListener('click', (e) => {
                 e.target.classList.add('selected')
                 colorChoice = i
                 rubberChoice = false
+                $color.style.background = colorStore[colorChoice]
             } else {
                 parent[i].classList.remove('selected')
             }
