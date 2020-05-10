@@ -217,13 +217,14 @@ var $canvas = document.querySelector('.canvas');
 var ctx = $canvas.getContext('2d');
 var mouseState = false;
 var lastLocation;
-var widthChoice;
-var rubberChoice;
-var colorChoice;
 var touchDevice = "ontouchend" in document ? true : false;
+var widthChoice = 1;
+var rubberChoice = false;
+var colorChoice = 0;
+var colorStore = ['black', 'red', '#ff5000', '1AAD19', 'blue', '#8000ff', '#483D8D'];
+var widthStore = ['20', '15', '10'];
 $canvas.width = document.documentElement.clientWidth;
 $canvas.height = document.documentElement.clientHeight - 135;
-ctx.strokeStyle = "black";
 
 if (touchDevice) {
   $canvas.ontouchstart = function (e) {
@@ -234,7 +235,8 @@ if (touchDevice) {
     ctx.beginPath();
     ctx.moveTo(lastLocation[0], lastLocation[1]);
     ctx.lineTo(e.touches[0].clientX, e.touches[0].clientY);
-    ctx.lineWidth = 10;
+    ctx.lineWidth = widthStore[widthChoice];
+    ctx.strokeStyle = colorStore[colorChoice];
     ctx.lineCap = 'round';
     ctx.stroke();
     lastLocation = [e.touches[0].clientX, e.touches[0].clientY];
@@ -254,7 +256,8 @@ if (touchDevice) {
       ctx.beginPath();
       ctx.moveTo(lastLocation[0], lastLocation[1]);
       ctx.lineTo(e.clientX, e.clientY);
-      ctx.lineWidth = 10;
+      ctx.lineWidth = widthStore[widthChoice];
+      ctx.strokeStyle = colorStore[colorChoice];
       ctx.lineCap = 'round';
       ctx.stroke();
       lastLocation = [e.clientX, e.clientY];
@@ -271,12 +274,14 @@ $dots.addEventListener('click', function (e) {
         parent[i].classList.remove('selected');
       } else {
         parent[i].classList.add('selected');
+        widthChoice = i;
       }
     }
   }
 });
 $rubber.addEventListener('click', function (e) {
   e.currentTarget.classList.add('selected');
+  rubberChoice = true;
 });
 $colorList.addEventListener('click', function (e) {
   if (e.target != e.currentTarget) {
@@ -287,6 +292,8 @@ $colorList.addEventListener('click', function (e) {
 
       if (parent[i] === e.target) {
         e.target.classList.add('selected');
+        colorChoice = i;
+        rubberChoice = false;
       } else {
         parent[i].classList.remove('selected');
       }

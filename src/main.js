@@ -10,15 +10,17 @@ const ctx = $canvas.getContext('2d');
 
 let mouseState = false
 let lastLocation
-
-let widthChoice
-let rubberChoice
-let colorChoice
 let touchDevice = "ontouchend" in document ? true : false;
+
+let widthChoice = 1
+let rubberChoice = false
+let colorChoice = 0
+let colorStore = ['black', 'red', '#ff5000', '1AAD19', 'blue', '#8000ff', '#483D8D']
+let widthStore = ['20', '15', '10']
+
 
 $canvas.width = document.documentElement.clientWidth
 $canvas.height = document.documentElement.clientHeight - 135
-ctx.strokeStyle = "black"
 
 
 if (touchDevice) {
@@ -29,7 +31,8 @@ if (touchDevice) {
         ctx.beginPath()
         ctx.moveTo(lastLocation[0], lastLocation[1])
         ctx.lineTo(e.touches[0].clientX, e.touches[0].clientY)
-        ctx.lineWidth = 10
+        ctx.lineWidth = widthStore[widthChoice]
+        ctx.strokeStyle = colorStore[colorChoice]
         ctx.lineCap = 'round'
         ctx.stroke()
         lastLocation = [e.touches[0].clientX, e.touches[0].clientY]
@@ -50,15 +53,14 @@ if (touchDevice) {
             ctx.beginPath()
             ctx.moveTo(lastLocation[0], lastLocation[1])
             ctx.lineTo(e.clientX, e.clientY)
-            ctx.lineWidth = 10
+            ctx.lineWidth = widthStore[widthChoice]
+            ctx.strokeStyle = colorStore[colorChoice]
             ctx.lineCap = 'round'
             ctx.stroke()
             lastLocation = [e.clientX, e.clientY]
         }
     }
 }
-
-
 
 
 $dots.addEventListener('click', (e) => {
@@ -69,6 +71,7 @@ $dots.addEventListener('click', (e) => {
                 parent[i].classList.remove('selected')
             } else {
                 parent[i].classList.add('selected')
+                widthChoice = i
             }
         }
 
@@ -77,6 +80,7 @@ $dots.addEventListener('click', (e) => {
 
 $rubber.addEventListener('click', (e) => {
     e.currentTarget.classList.add('selected')
+    rubberChoice = true
 })
 
 $colorList.addEventListener('click', (e) => {
@@ -86,6 +90,8 @@ $colorList.addEventListener('click', (e) => {
             let parent = e.currentTarget.children
             if (parent[i] === e.target) {
                 e.target.classList.add('selected')
+                colorChoice = i
+                rubberChoice = false
             } else {
                 parent[i].classList.remove('selected')
             }
