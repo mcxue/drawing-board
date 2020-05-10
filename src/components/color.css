@@ -1,0 +1,32 @@
+.color-list{
+    display: flex;
+    justify-content:space-between;
+
+}
+.black,.red,.orange,.green,.blue,.purple,.dark{
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+}
+.black{
+    background: #000;
+}
+.red{
+    background: #f00;
+
+}
+.orange{
+    background: #ff8000;
+}
+.green{
+    background: #1AAD19;
+}
+.blue{
+    background: #0000ff;
+}
+.purple{
+    background: #8000ff;
+}
+.dark{
+    background: #483D8B;
+}

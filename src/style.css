@@ -1,0 +1,32 @@
+@import './components/reset.css';
+@import './components/display.css';
+@import './components/color.css';
+
+.wrapper{
+    height:100vh;
+    display: flex;
+    flex-direction:column;
+}
+.drawing-board{
+    background: #fff;
+    flex-grow:1;
+}
+.tool-wrapper{
+    background: #eee;
+    display: flex;
+    height: 135px;
+    justify-content:center;
+    align-items: center;
+}
+
+.tool{
+    width:331px;
+    height:76px;
+    display: flex;
+    flex-direction: column;
+    justify-content:space-between;
+}
+.selected{
+    box-shadow: 0px 0px 5px rgba(0,0,0,0.8);
+}
+
