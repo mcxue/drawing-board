@@ -130,6 +130,36 @@ var $color = document.querySelector('.color');
 var $dots = document.querySelector('.dots');
 var $rubber = document.querySelector('.rubber');
 var $colorList = document.querySelector('.color-list');
+var $canvas = document.querySelector('.canvas');
+var ctx = $canvas.getContext('2d');
+ctx.strokeStyle = "black";
+$canvas.width = document.documentElement.clientWidth;
+$canvas.height = document.documentElement.clientHeight - 135;
+var mouseState = false;
+var lastLocation = [0, 0];
+
+$canvas.onmousedown = function (e) {
+  mouseState = true;
+  lastLocation = [e.clientX, e.clientY];
+};
+
+$canvas.onmouseup = function () {
+  mouseState = false;
+};
+
+$canvas.onmousemove = function (e) {
+  if (mouseState) {
+    ctx.beginPath();
+    ctx.moveTo(lastLocation[0], lastLocation[1]);
+    console.log(lastLocation[0], lastLocation[1]);
+    ctx.lineTo(e.clientX, e.clientY);
+    ctx.lineWidth = 10;
+    ctx.lineCap = 'round';
+    ctx.stroke();
+    lastLocation = [e.clientX, e.clientY];
+  }
+};
+
 $dots.addEventListener('click', function (e) {
   if (e.target !== e.currentTarget) {
     for (var i = 0; i < e.currentTarget.children.length; i++) {
@@ -155,7 +185,6 @@ $colorList.addEventListener('click', function (e) {
 
       if (parent[i] === e.target) {
         e.target.classList.add('selected');
-        console.log(e.target.classList);
       } else {
         parent[i].classList.remove('selected');
       }
@@ -163,4 +192,4 @@ $colorList.addEventListener('click', function (e) {
   }
 });
 },{"./style.css":"iMte"}]},{},["epB2"], null)
-//# sourceMappingURL=main.b1009cbf.js.map
+//# sourceMappingURL=main.2bd2c94c.js.map
