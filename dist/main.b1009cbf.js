@@ -163,4 +163,4 @@ $colorList.addEventListener('click', function (e) {
   }
 });
 },{"./style.css":"iMte"}]},{},["epB2"], null)
-//# sourceMappingURL=main.343b55c5.js.map
+//# sourceMappingURL=main.b1009cbf.js.map
