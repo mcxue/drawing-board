@@ -1,4 +1,8 @@
+import "reset.css"
 import "./style.css"
+import './display.css'
+import './color.css'
+
 
 const $color = document.querySelector('.color')
 const $dots = document.querySelector('.dots')
@@ -21,6 +25,8 @@ let widthStore = ['20', '15', '10']
 
 $canvas.width = document.documentElement.clientWidth
 $canvas.height = document.documentElement.clientHeight - 135
+
+
 
 if (touchDevice) {
     $canvas.ontouchstart = (e) => {
@@ -54,7 +60,7 @@ if (touchDevice) {
 
         if (mouseState) {
             if (rubberChoice) {
-                ctx.clearRect(e.clientX, e.clientY, 30, 30)
+                ctx.clearRect(e.clientX - 15, e.clientY - 15, 30, 30)
             } else {
                 ctx.beginPath()
                 ctx.moveTo(lastLocation[0], lastLocation[1])
@@ -86,9 +92,17 @@ $dots.addEventListener('click', (e) => {
     }
 })
 
+$color.onclick = (e) => {
+    e.currentTarget.classList.add('selected')
+    rubberChoice = false
+    $rubber.classList.remove('selected')
+}
+
+
 $rubber.addEventListener('click', (e) => {
     e.currentTarget.classList.add('selected')
     rubberChoice = true
+    $color.classList.remove('selected')
 })
 
 $colorList.addEventListener('click', (e) => {

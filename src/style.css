@@ -1,7 +1,3 @@
-@import './components/reset.css';
-@import './components/display.css';
-@import './components/color.css';
-
 .wrapper{
     height:100vh;
     display: flex;
