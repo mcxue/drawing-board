@@ -91,14 +91,6 @@ function drawLine(x1,y1,x2,y2){
 function clearLine(x,y){
     ctx.clearRect(x,y,30,30)
 }
-function drawDot(x,y,r){
-    ctx.strokeStyle = colorChoice
-    ctx.beginPath()
-    ctx.arc(x, y, r, 0, 2 * Math.PI)
-    ctx.fill()
-    ctx.stroke()
-
-}
 
 function clearSquare(x,y){
     ctx.clearRect(x,y,30,30)

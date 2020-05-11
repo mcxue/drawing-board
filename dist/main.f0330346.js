@@ -215,14 +215,6 @@ function clearLine(x, y) {
   ctx.clearRect(x, y, 30, 30);
 }
 
-function drawDot(x, y, r) {
-  ctx.strokeStyle = colorChoice;
-  ctx.beginPath();
-  ctx.arc(x, y, r, 0, 2 * Math.PI);
-  ctx.fill();
-  ctx.stroke();
-}
-
 function clearSquare(x, y) {
   ctx.clearRect(x, y, 30, 30);
 }
@@ -270,4 +262,4 @@ if (touchDevice) {
   };
 }
 },{"./components/reset.css":"OKMM","./components/style.css":"OKMM","./components/toolbar.css":"OKMM","./components/canvas.css":"OKMM"}]},{},["epB2"], null)
-//# sourceMappingURL=main.5c5dc693.js.map
+//# sourceMappingURL=main.f0330346.js.map
