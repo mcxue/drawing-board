@@ -5,37 +5,36 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no">
     <title>浪浪画板</title>
-    <link rel="shortcut icon" href="./img/favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
 </head>
 
 <body>
-    <div class="wrapper">
-        <div class="drawing-board">
+    <div class="app">
+        <main class="canvas-wrapper">
             <canvas class="canvas"></canvas>
-        </div>
-        <div class="tool-wrapper">
-            <div class="tool">
+        </main>
+        <footer class="tool-wrapper">
+            <div class="toolbar">
                 <div class='display'>
-                    <div class='color'></div>
-                    <div class='dots'>
-                        <div class="dot1"></div>
-                        <div class="dot2 selected"></div>
-                        <div class="dot3"></div>
-                    </div>
+                    <div class='color-show selected'></div>
+                    <ol class='brush-list'>
+                        <li class="brush0"></li>
+                        <li class="brush1 selected"></li>
+                        <li class="brush2"></li>
+                    </ol>
                     <div class='rubber'></div>
                 </div>
-                <div class="color-list">
-                    <div class="black selected"></div>
-                    <div class="red"></div>
-                    <div class="orange"></div>
-                    <div class="green"></div>
-                    <div class="blue"></div>
-                    <div class="purple"></div>
-                    <div class="dark"></div>
-
-                </div>
+                <ul class="color-list">
+                    <li class="black selected"></li>
+                    <li class="red"></li>
+                    <li class="orange"></li>
+                    <li class="green"></li>
+                    <li class="blue"></li>
+                    <li class="purple"></li>
+                    <li class="dark"></li>
+                </ul>
             </div>
-        </div>
+        </footer>
     </div>
     <script src="main.js"></script>
 </body>

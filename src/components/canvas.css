@@ -1,0 +1,8 @@
+.canvas-wrapper{
+    background: #fff;
+    flex-grow:1;
+}
+.canvas{
+    display: block;
+    vertical-align: middle;
+}

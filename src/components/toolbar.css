@@ -1,0 +1,98 @@
+.tool-wrapper{
+    background: #eee;
+    display: flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items: center;
+}
+
+.toolbar{
+    margin-top:20px;
+    margin-bottom: 20px;
+    min-width:331px;
+    min-height:76px;
+    display: flex;
+    flex-direction: column;
+    justify-content:space-between;
+}
+
+.display{
+    display: flex;
+    justify-content: space-between;
+    align-items:center;
+}
+
+.color-show{
+    width: 30px;
+    height: 30px;
+    border:1px solid #000;
+    background: #000;
+}
+
+.brush-list{
+    display: flex;
+    width: 170px;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.brush0,.brush1,.brush2{
+    border-radius: 50%;
+    background: #000;
+}
+
+.brush0{
+    width: 20px;
+    height: 20px;
+}
+.brush1{
+    width: 15px;
+    height: 15px;
+}
+.brush2{
+    width: 10px;
+    height: 10px;
+}
+
+.rubber{
+    width: 30px;
+    height: 30px;
+    background: #fff;
+}
+
+.color-list{
+    display: flex;
+    justify-content:space-between;
+}
+
+.black,.red,.orange,.green,.blue,.purple,.dark{
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+}
+
+.black{
+    background: #000;
+}
+.red{
+    background: #f00;
+}
+.orange{
+    background: #ff8000;
+}
+.green{
+    background: #1AAD19;
+}
+.blue{
+    background: #0000ff;
+}
+.purple{
+    background: #8000ff;
+}
+.dark{
+    background: #483D8B;
+}
+
+.selected{
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+}
