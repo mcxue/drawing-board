@@ -169,13 +169,21 @@ $rubber.addEventListener('click', function (e) {
   var rubber = e.currentTarget;
   rubber.classList.add('selected');
   $colorShow.classList.remove('selected');
-  rubberChoice = true;
+
+  if (rubberChoice) {
+    clearCanvas();
+    rubberChoice = false;
+    rubber.classList.remove('selected');
+    $colorShow.classList.add('selected');
+  } else {
+    rubberChoice = true;
+  }
 });
 $colorList.addEventListener('click', function (e) {
   if (e.target !== e.currentTarget) {
     $rubber.classList.remove('selected');
-    var tempory = e.currentTarget;
-    var colorList = tempory.children;
+    var temporary = e.currentTarget;
+    var colorList = temporary.children;
     var color = e.target;
 
     for (var i = 0; i < colorList.length; i++) {
@@ -213,18 +221,32 @@ function drawLine(x1, y1, x2, y2) {
 
 function drawDot(x, y) {
   ctx.fillStyle = colorChoice;
-  console.log(colorChoice);
   ctx.beginPath();
   ctx.arc(x, y, widthChoice / 2, 0, 2 * Math.PI);
   ctx.fill();
 }
 
-function clearLine(x, y) {
-  ctx.clearRect(x, y, 30, 30);
+function clearLine(x1, y1, x2, y2) {
+  ctx.lineWidth = 30;
+  ctx.strokeStyle = 'white';
+  ctx.lineCap = 'round';
+  ctx.beginPath();
+  ctx.moveTo(x1, y1);
+  ctx.lineTo(x2, y2);
+  ctx.stroke();
+  lastLocation = [x2, y2];
 }
 
-function clearSquare(x, y) {
-  ctx.clearRect(x, y, 30, 30);
+function clearDot(x, y) {
+  ctx.fillStyle = 'white';
+  ctx.beginPath();
+  ctx.arc(x, y, 15, 0, 2 * Math.PI);
+  ctx.fill();
+}
+
+function clearCanvas() {
+  $canvas.width = $canvasWrapper.clientWidth;
+  $canvas.height = $canvasWrapper.clientHeight;
 }
 
 if (touchDevice) {
@@ -232,22 +254,27 @@ if (touchDevice) {
     lastLocation = [e.touches[0].clientX, e.touches[0].clientY];
 
     if (rubberChoice) {
-      clearSquare(e.touches[0].clientX - 15, e.touches[0].clientY - 15, 30, 30);
+      clearDot(e.touches[0].clientX, e.touches[0].clientY);
     } else {
-      console.log("执行了一次画点");
       drawDot(e.touches[0].clientX, e.touches[0].clientY);
     }
   };
 
   $canvas.ontouchmove = function (e) {
     if (rubberChoice) {
-      clearLine(e.touches[0].clientX - 15, e.touches[0].clientY - 15);
+      clearLine(lastLocation[0], lastLocation[1], e.touches[0].clientX, e.touches[0].clientY);
     } else {
       drawLine(lastLocation[0], lastLocation[1], e.touches[0].clientX, e.touches[0].clientY);
     }
   };
 } else {
   $canvas.onmousedown = function (e) {
+    if (rubberChoice) {
+      clearDot(e.clientX, e.clientY);
+    } else {
+      drawDot(e.clientX, e.clientY);
+    }
+
     mouseState = true;
     lastLocation = [e.clientX, e.clientY];
   };
@@ -259,20 +286,12 @@ if (touchDevice) {
   $canvas.onmousemove = function (e) {
     if (mouseState) {
       if (rubberChoice) {
-        clearLine(e.clientX - 15, e.clientY - 15, 30, 30);
+        clearLine(lastLocation[0], lastLocation[1], e.clientX, e.clientY);
       } else {
         drawLine(lastLocation[0], lastLocation[1], e.clientX, e.clientY);
       }
     }
   };
-
-  $canvas.onclick = function (e) {
-    if (rubberChoice) {
-      clearSquare(e.clientX - 15, e.clientY - 15, 30, 30);
-    } else {
-      drawDot(e.clientX, e.clientY);
-    }
-  };
 }
 },{"./components/reset.css":"OKMM","./components/style.css":"OKMM","./components/toolbar.css":"OKMM","./components/canvas.css":"OKMM"}]},{},["epB2"], null)
-//# sourceMappingURL=main.d9eee7d0.js.map
+//# sourceMappingURL=main.626d1616.js.map
