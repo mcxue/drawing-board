@@ -211,6 +211,14 @@ function drawLine(x1, y1, x2, y2) {
   lastLocation = [x2, y2];
 }
 
+function drawDot(x, y) {
+  ctx.fillStyle = colorChoice;
+  console.log(colorChoice);
+  ctx.beginPath();
+  ctx.arc(x, y, widthChoice / 2, 0, 2 * Math.PI);
+  ctx.fill();
+}
+
 function clearLine(x, y) {
   ctx.clearRect(x, y, 30, 30);
 }
@@ -225,6 +233,9 @@ if (touchDevice) {
 
     if (rubberChoice) {
       clearSquare(e.touches[0].clientX - 15, e.touches[0].clientY - 15, 30, 30);
+    } else {
+      console.log("执行了一次画点");
+      drawDot(e.touches[0].clientX, e.touches[0].clientY);
     }
   };
 
@@ -258,8 +269,10 @@ if (touchDevice) {
   $canvas.onclick = function (e) {
     if (rubberChoice) {
       clearSquare(e.clientX - 15, e.clientY - 15, 30, 30);
+    } else {
+      drawDot(e.clientX, e.clientY);
     }
   };
 }
 },{"./components/reset.css":"OKMM","./components/style.css":"OKMM","./components/toolbar.css":"OKMM","./components/canvas.css":"OKMM"}]},{},["epB2"], null)
-//# sourceMappingURL=main.f0330346.js.map
+//# sourceMappingURL=main.d9eee7d0.js.map

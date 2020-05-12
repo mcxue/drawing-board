@@ -88,6 +88,13 @@ function drawLine(x1,y1,x2,y2){
     ctx.stroke()
     lastLocation = [x2,y2]
 }
+function drawDot(x,y){
+    ctx.fillStyle = colorChoice
+    console.log(colorChoice)
+    ctx.beginPath()
+    ctx.arc(x,y,widthChoice/2,0 ,2*Math.PI)
+    ctx.fill()
+}
 function clearLine(x,y){
     ctx.clearRect(x,y,30,30)
 }
@@ -101,8 +108,10 @@ if (touchDevice) {
         lastLocation = [e.touches[0].clientX, e.touches[0].clientY]
         if(rubberChoice){
             clearSquare(e.touches[0].clientX-15, e.touches[0].clientY-15,30,30)
+        }else{
+            console.log("执行了一次画点")
+            drawDot(e.touches[0].clientX, e.touches[0].clientY)
         }
-
     }
     $canvas.ontouchmove = (e) => {
         if (rubberChoice) {
@@ -131,6 +140,8 @@ if (touchDevice) {
     $canvas.onclick =(e)=>{
         if(rubberChoice){
             clearSquare(e.clientX-15, e.clientY-15,30,30)
+        }else{
+            drawDot(e.clientX,e.clientY)
         }
     }
 }
