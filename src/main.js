@@ -25,7 +25,7 @@ $colorShow.onclick = (e) => {
 
 $brushList.addEventListener('click', (e) => {
     if (e.target !== e.currentTarget) {
-        const  temporary = e.currentTarget
+        const temporary = e.currentTarget
         const brushList = temporary.children
         const brush = e.target
         for (let i = 0; i < brushList.length; i++) {
@@ -41,15 +41,15 @@ $brushList.addEventListener('click', (e) => {
 })
 
 $rubber.addEventListener('click', (e) => {
-    let rubber =e.currentTarget
+    let rubber = e.currentTarget
     rubber.classList.add('selected')
     $colorShow.classList.remove('selected')
-    if(rubberChoice){
+    if (rubberChoice) {
         clearCanvas()
-        rubberChoice=false
+        rubberChoice = false
         rubber.classList.remove('selected')
         $colorShow.classList.add('selected')
-    }else{
+    } else {
         rubberChoice = true
     }
 })
@@ -57,6 +57,7 @@ $rubber.addEventListener('click', (e) => {
 $colorList.addEventListener('click', (e) => {
     if (e.target !== e.currentTarget) {
         $rubber.classList.remove('selected')
+        $colorShow.classList.add('selected')
         const temporary = e.currentTarget
         const colorList = temporary.children
         let color = e.target
@@ -85,42 +86,42 @@ let lastLocation
 $canvas.width = $canvasWrapper.clientWidth
 $canvas.height = $canvasWrapper.clientHeight
 
-function drawLine(x1,y1,x2,y2){
+function drawLine(x1, y1, x2, y2) {
     ctx.lineWidth = widthChoice
     ctx.strokeStyle = colorChoice
     ctx.lineCap = 'round'
     ctx.beginPath()
-    ctx.moveTo(x1,y1)
-    ctx.lineTo(x2,y2)
+    ctx.moveTo(x1, y1)
+    ctx.lineTo(x2, y2)
     ctx.stroke()
-    lastLocation = [x2,y2]
+    lastLocation = [x2, y2]
 }
-function drawDot(x,y){
+function drawDot(x, y) {
     ctx.fillStyle = colorChoice
     ctx.beginPath()
-    ctx.arc(x,y,widthChoice/2,0 ,2*Math.PI)
+    ctx.arc(x, y, widthChoice / 2, 0, 2 * Math.PI)
     ctx.fill()
 }
-function clearLine(x1,y1,x2,y2){
+function clearLine(x1, y1, x2, y2) {
     ctx.lineWidth = 30
     ctx.strokeStyle = 'white'
     ctx.lineCap = 'round'
     ctx.beginPath()
-    ctx.moveTo(x1,y1)
-    ctx.lineTo(x2,y2)
+    ctx.moveTo(x1, y1)
+    ctx.lineTo(x2, y2)
     ctx.stroke()
-    lastLocation = [x2,y2]
+    lastLocation = [x2, y2]
 }
 
-function clearDot(x,y){
+function clearDot(x, y) {
     ctx.fillStyle = 'white'
 
     ctx.beginPath()
-    ctx.arc(x,y,15,0 ,2*Math.PI)
+    ctx.arc(x, y, 15, 0, 2 * Math.PI)
     ctx.fill()
 }
 
-function clearCanvas(){
+function clearCanvas() {
     $canvas.width = $canvasWrapper.clientWidth
     $canvas.height = $canvasWrapper.clientHeight
 }
@@ -128,17 +129,17 @@ function clearCanvas(){
 if (touchDevice) {
     $canvas.ontouchstart = (e) => {
         lastLocation = [e.touches[0].clientX, e.touches[0].clientY]
-        if(rubberChoice){
+        if (rubberChoice) {
             clearDot(e.touches[0].clientX, e.touches[0].clientY)
-        }else{
+        } else {
             drawDot(e.touches[0].clientX, e.touches[0].clientY)
         }
     }
     $canvas.ontouchmove = (e) => {
         if (rubberChoice) {
-            clearLine(lastLocation[0],lastLocation[1],e.touches[0].clientX,e.touches[0].clientY)
+            clearLine(lastLocation[0], lastLocation[1], e.touches[0].clientX, e.touches[0].clientY)
         } else {
-            drawLine(lastLocation[0],lastLocation[1],e.touches[0].clientX,e.touches[0].clientY)
+            drawLine(lastLocation[0], lastLocation[1], e.touches[0].clientX, e.touches[0].clientY)
         }
     }
 } else {

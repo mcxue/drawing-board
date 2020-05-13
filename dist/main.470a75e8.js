@@ -182,6 +182,7 @@ $rubber.addEventListener('click', function (e) {
 $colorList.addEventListener('click', function (e) {
   if (e.target !== e.currentTarget) {
     $rubber.classList.remove('selected');
+    $colorShow.classList.add('selected');
     var temporary = e.currentTarget;
     var colorList = temporary.children;
     var color = e.target;
@@ -294,4 +295,4 @@ if (touchDevice) {
   };
 }
 },{"./components/reset.css":"OKMM","./components/style.css":"OKMM","./components/toolbar.css":"OKMM","./components/canvas.css":"OKMM"}]},{},["epB2"], null)
-//# sourceMappingURL=main.626d1616.js.map
+//# sourceMappingURL=main.470a75e8.js.map
